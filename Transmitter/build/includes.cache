@@ -1,0 +1,17 @@
+[
+  {
+    "Sourcefile": null,
+    "Include": "",
+    "Includepath": "C:\\Users\\TheGo\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\3.3.12\\cores\\esp32"
+  },
+  {
+    "Sourcefile": null,
+    "Include": "",
+    "Includepath": "C:\\Users\\TheGo\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\3.3.12\\variants\\esp32"
+  },
+  {
+    "Sourcefile": "C:\\Users\\TheGo\\Documents\\OtherRandomThings\\Hacknotts26\\Reciever\\build\\sketch\\Reciever.ino.cpp",
+    "Include": "",
+    "Includepath": null
+  }
+]
