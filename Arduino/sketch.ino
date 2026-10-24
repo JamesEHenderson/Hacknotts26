@@ -11,6 +11,11 @@ const int ANGLE_UP   = 0;
 const int ANGLE_DOWN = 90;
 
 const unsigned long UNIT = 300; 
+
+
+// chaarctyer limit = 32 (temp)//
+const uint8_t MAX_MSG = 32;
+
 LiquidCrystal_I2C lcdIn(0x27, 16, 2);
 LiquidCrystal_I2C lcdOut(0x3F, 16, 2);
 
@@ -49,7 +54,42 @@ void printLine(LiquidCrystal_I2C& lcd, uint8_t row, const String& text) {
   }
 }
 
+// sender //
+String toSend = "";
+String toReceieve = "";
+enum SendState {S_IDLE , S_MARK , S_GAP};
+SendState sState = S_IDLE;
 
+const char* cutPattrn = nullptr;
+uint8_t elemIdx = 0;
+
+unsigned long sTimer = 0 ;
+unsigned long sDuration = 0 ;
+
+//receiever//
+
+bool blocked = false;
+bool RawPrev = false;
+
+unsigned long lastChange = 0;
+unsigned long lastEdge = 0;
+
+String rxPattern = "";
+String Recieved = "";
+bool spaceAdded = true ;
+
+void showOutput() {
+  String msg = received.length() > MAX_MSG ? received.substring(received.length() - MAX_MSG) : received;
+  printLine(lcdOut, 0, msg.substring(0, 16));
+  printLine(lcdOut, 1, msg.length() > 16 ? msg.substring(16) : "");
+}
+
+void addReceived(char c) {
+  received += c;
+  if (received.length() > MAX_MSG) received.remove(0, received.length() - MAX_MSG);
+  Serial.print(c);
+  showOutput();
+}
 
 void setup() {}
 void loop() {}
