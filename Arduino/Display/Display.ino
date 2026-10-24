@@ -5,12 +5,9 @@
 byte echoPins[] = {2};
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
-// --- Configuration & Thresholds ---
-const int thresholdDist = 15; // Centimeters. Distances below this are considered a "press".
-const unsigned long dotLen = 300; // Max milliseconds for a short press (dot).
-const unsigned long letterGap = 700; // Milliseconds of inactivity to finalize a letter.
-const unsigned long wordGap = 2000; // Milliseconds of inactivity to insert a space.
-const unsigned long clearHold = 3000; // Milliseconds of continuous cover to clear the display.
+// --- Settings & State Variables ---
+const uint8_t thresholdDist = 15; 
+const unsigned long dotLen = 300, letterGap = 700, wordGap = 2000, clearHold = 3000;
 
 // --- State Tracking Variables ---
 bool isPressed = false;
@@ -18,7 +15,8 @@ bool spacePrinted = true;
 bool displayCleared = false;
 unsigned long stateChangeTime = 0;
 String currentMorse = "";
-int cursorCol = 0, cursorRow = 0;
+uint8_t cursorCol = 0, cursorRow = 0;
+
 
 // Lookup table mapping Morse code sequences to the alphabet (A-Z)
 const char* morseTable[] = {
@@ -36,7 +34,7 @@ void setup() {
 
 // Scans the lookup table and returns the matching character, or '?' if invalid
 char decodeMorse(String m) {
-    for (int i = 0; i < 26; i++) {
+    for (uint8_t i = 0; i < 26; i++) {
         if (m == morseTable[i]) return 'A' + i;
     }
     return '?';
@@ -77,8 +75,9 @@ void loop() {
             currentMorse = ""; 
             displayCleared = true;
         }
-    } else { // --- Sensor Uncovered ---
-        if (isPressed) { // Sensor uncovered, evaluate the press duration.
+        
+    } else { // --- UNCOVERED ---
+        if (isPressed) {
             isPressed = false;
             
             // Ignore tiny fluctuations (<50ms) to prevent phantom inputs
