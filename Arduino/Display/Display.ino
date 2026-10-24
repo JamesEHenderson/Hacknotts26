@@ -6,13 +6,14 @@ byte echoPins[] = {2};
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 // --- Settings & State Variables ---
-const int thresholdDist = 15; 
+const uint8_t thresholdDist = 15; 
 const unsigned long dotLen = 300, letterGap = 700, wordGap = 2000, clearHold = 3000;
 
 bool isPressed = false, spacePrinted = true, displayCleared = false;
 unsigned long stateChangeTime = 0;
 String currentMorse = "";
-int cursorCol = 0, cursorRow = 0;
+uint8_t cursorCol = 0, cursorRow = 0;
+
 
 const char* morseTable[] = {
   ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---",
@@ -28,7 +29,7 @@ void setup() {
 }
 
 char decodeMorse(String m) {
-    for (int i = 0; i < 26; i++) {
+    for (uint8_t i = 0; i < 26; i++) {
         if (m == morseTable[i]) return 'A' + i;
     }
     return '?';
@@ -67,6 +68,7 @@ void loop() {
             currentMorse = ""; 
             displayCleared = true;
         }
+        
     } else { // --- UNCOVERED ---
         if (isPressed) {
             isPressed = false;
