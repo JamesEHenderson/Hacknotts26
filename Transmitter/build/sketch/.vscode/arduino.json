@@ -1,0 +1,9 @@
+#line 1 "C:\\Users\\TheGo\\Documents\\OtherRandomThings\\Hacknotts26\\Reciever\\.vscode\\arduino.json"
+{
+    "sketch": "reciever.ino",
+    "output": "build",
+    "configuration": "JTAGAdapter=default,PSRAM=disabled,PartitionScheme=default,CPUFreq=240,FlashMode=qio,FlashFreq=80,FlashSize=4M,UploadSpeed=921600,LoopCore=1,EventsCore=1,DebugLevel=none,EraseFlash=none,ZigbeeMode=default",
+    "board": "esp32:esp32:esp32",
+    "port": "COM4",
+    "programmer": "esptool"
+}

@@ -1,0 +1,42 @@
+[
+ {
+  "directory": "c:\\Users\\TheGo\\Documents\\OtherRandomThings\\Hacknotts26\\Reciever",
+  "arguments": [
+   "C:\\Users\\TheGo\\AppData\\Local\\Arduino15\\packages\\esp32\\tools\\esp-x32\\2601/bin/xtensa-esp32-elf-g++",
+   "-MMD",
+   "-c",
+   "@C:\\Users\\TheGo\\AppData\\Local\\Arduino15\\packages\\esp32\\tools\\esp32-libs\\3.3.12/flags/cpp_flags",
+   "-w",
+   "-Os",
+   "-Werror=return-type",
+   "-DF_CPU=240000000L",
+   "-DARDUINO=10607",
+   "-DARDUINO_ESP32_DEV",
+   "-DARDUINO_ARCH_ESP32",
+   "-DARDUINO_BOARD=\"ESP32_DEV\"",
+   "-DARDUINO_VARIANT=\"esp32\"",
+   "-DARDUINO_PARTITION_default",
+   "-DARDUINO_HOST_OS=\"windows\"",
+   "-DARDUINO_FQBN=\"esp32:esp32:esp32:JTAGAdapter=default,PSRAM=disabled,PartitionScheme=default,CPUFreq=240,FlashMode=qio,FlashFreq=80,FlashSize=4M,UploadSpeed=921600,LoopCore=1,EventsCore=1,DebugLevel=none,EraseFlash=none,ZigbeeMode=default\"",
+   "-DESP32=ESP32",
+   "-DCORE_DEBUG_LEVEL=0",
+   "-DARDUINO_RUNNING_CORE=1",
+   "-DARDUINO_EVENT_RUNNING_CORE=1",
+   "-DARDUINO_USB_CDC_ON_BOOT=0",
+   "@C:\\Users\\TheGo\\AppData\\Local\\Arduino15\\packages\\esp32\\tools\\esp32-libs\\3.3.12/flags/defines",
+   "-IC:\\Users\\TheGo\\Documents\\OtherRandomThings\\Hacknotts26\\Reciever",
+   "-iprefix",
+   "C:\\Users\\TheGo\\AppData\\Local\\Arduino15\\packages\\esp32\\tools\\esp32-libs\\3.3.12/include/",
+   "@C:\\Users\\TheGo\\AppData\\Local\\Arduino15\\packages\\esp32\\tools\\esp32-libs\\3.3.12/flags/includes",
+   "-IC:\\Users\\TheGo\\AppData\\Local\\Arduino15\\packages\\esp32\\tools\\esp32-libs\\3.3.12/qio_qspi/include",
+   "-IC:\\Users\\TheGo\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\3.3.12\\cores\\esp32",
+   "-IC:\\Users\\TheGo\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\3.3.12\\variants\\esp32",
+   "@C:\\Users\\TheGo\\Documents\\OtherRandomThings\\Hacknotts26\\Reciever\\build/build_opt.h",
+   "@C:\\Users\\TheGo\\Documents\\OtherRandomThings\\Hacknotts26\\Reciever\\build/file_opts",
+   "C:\\Users\\TheGo\\Documents\\OtherRandomThings\\Hacknotts26\\Reciever\\build\\sketch\\Reciever.ino.cpp",
+   "-o",
+   "C:\\Users\\TheGo\\Documents\\OtherRandomThings\\Hacknotts26\\Reciever\\build\\sketch\\Reciever.ino.cpp.o"
+  ],
+  "file": "C:\\Users\\TheGo\\Documents\\OtherRandomThings\\Hacknotts26\\Reciever\\build\\sketch\\Reciever.ino.cpp"
+ }
+]
