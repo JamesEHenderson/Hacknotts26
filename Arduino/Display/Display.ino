@@ -21,9 +21,10 @@ const char* morseTable[] = {
 };
 
 void setup() {
-    HCSR04.begin(3, echoPins, 1); // triggerPin = 3, echoCount = 1
+    HCSR04.begin(3, echoPins, 1);
     lcd.init();
     lcd.backlight();
+    lcd.blink();                          // optional: shows the pending cell
 }
 
 char decodeMorse(String m) {
@@ -33,11 +34,17 @@ char decodeMorse(String m) {
     return '?';
 }
 
+// Step 1: new helper (must be below decodeMorse)
+void previewLetter() {
+    lcd.setCursor(cursorCol, cursorRow);
+    lcd.print(decodeMorse(currentMorse));
+}
+
 void advanceCursor() {
     if (++cursorCol >= 16) {
         cursorCol = 0;
-        cursorRow = !cursorRow;         // Toggle between row 0 and 1
-        if (cursorRow == 0) lcd.clear(); // Clear when returning to top-left
+        cursorRow = !cursorRow;
+        if (cursorRow == 0) lcd.clear();
     }
     lcd.setCursor(cursorCol, cursorRow);
 }
@@ -47,14 +54,14 @@ void loop() {
     unsigned long now = millis();
     unsigned long elapsed = now - stateChangeTime;
 
-    if (dist <= 0 || dist > 400) { delay(30); return; } // Ignore errors
+    if (dist <= 0 || dist > 400) { delay(30); return; }
 
     if (dist < thresholdDist) { // --- COVERED ---
         if (!isPressed) {
             isPressed = true;
             stateChangeTime = now; 
             displayCleared = false;
-        } else if (!displayCleared && elapsed > clearHold) { // Long hold to clear
+        } else if (!displayCleared && elapsed > clearHold) {
             lcd.clear();
             cursorCol = cursorRow = 0;
             currentMorse = ""; 
@@ -63,16 +70,14 @@ void loop() {
     } else { // --- UNCOVERED ---
         if (isPressed) {
             isPressed = false;
-            // Record dot or dash if not clearing the screen (ignore <50ms glitches)
             if (!displayCleared && elapsed > 50) {
                 currentMorse += (elapsed <= dotLen) ? "." : "-";
+                previewLetter();          // Step 2: show the letter so far
             }
             stateChangeTime = now;
         } else {
-            // Check timeouts for letters and spaces
             if (currentMorse.length() > 0 && elapsed > letterGap) {
-                lcd.print(decodeMorse(currentMorse));
-                advanceCursor();
+                advanceCursor();          // Step 3: commit (no lcd.print here anymore)
                 currentMorse = ""; 
                 spacePrinted = false;
             } else if (currentMorse.length() == 0 && !spacePrinted && elapsed > wordGap) {
