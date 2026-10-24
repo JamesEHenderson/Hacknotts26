@@ -2,24 +2,18 @@
 #include <LiquidCrystal_I2C.h>
 #include <HCSR04.h>
 
-byte triggerPin = 3;
-byte echoCount = 1;
 byte echoPins[] = {2};
-
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
-// --- Morse Code Settings ---
-const int thresholdDistance = 15;        // cm (Below this is "pressed", above is "released")
-const unsigned long dotDuration = 300;   // ms (Less than this is a dot, more is a dash)
-const unsigned long letterTimeout = 700; // ms (Time hand must be away to finish the letter)
+// --- Settings & State Variables ---
+const int thresholdDist = 15; 
+const unsigned long dotLen = 300, letterGap = 700, wordGap = 2000, clearHold = 3000;
 
-bool isPressed = false;
+bool isPressed = false, spacePrinted = true, displayCleared = false;
 unsigned long stateChangeTime = 0;
 String currentMorse = "";
-int cursorCol = 0;
-int cursorRow = 0;
+int cursorCol = 0, cursorRow = 0;
 
-// Lookup table for A-Z
 const char* morseTable[] = {
   ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---",
   "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-",
@@ -27,78 +21,66 @@ const char* morseTable[] = {
 };
 
 void setup() {
-    Serial.begin(9600);
-    HCSR04.begin(triggerPin, echoPins, echoCount);
-
+    HCSR04.begin(3, echoPins, 1); // triggerPin = 3, echoCount = 1
     lcd.init();
     lcd.backlight();
-    lcd.clear();
-    lcd.setCursor(0, 0);
 }
 
-// Function to match the dots/dashes to a letter
-char decodeMorse(String morse) {
+char decodeMorse(String m) {
     for (int i = 0; i < 26; i++) {
-        if (morse == morseTable[i]) {
-            return (char)('A' + i); // Calculate letter based on array index
-        }
+        if (m == morseTable[i]) return 'A' + i;
     }
-    return '?'; // Return a question mark if the pattern is invalid
+    return '?';
+}
+
+void advanceCursor() {
+    if (++cursorCol >= 16) {
+        cursorCol = 0;
+        cursorRow = !cursorRow;         // Toggle between row 0 and 1
+        if (cursorRow == 0) lcd.clear(); // Clear when returning to top-left
+    }
+    lcd.setCursor(cursorCol, cursorRow);
 }
 
 void loop() {
-    double* distances = HCSR04.measureDistanceCm();
-    double dist = distances[0];
-    unsigned long currentMillis = millis();
+    double dist = HCSR04.measureDistanceCm()[0];
+    unsigned long now = millis();
+    unsigned long elapsed = now - stateChangeTime;
 
-    // Ignore extreme/error readings from the sensor
-    if (dist <= 0 || dist > 400) {
-        delay(30);
-        return; 
-    }
+    if (dist <= 0 || dist > 400) { delay(30); return; } // Ignore errors
 
-    if (dist < thresholdDistance) {  // Small distance = Pressed
+    if (dist < thresholdDist) { // --- COVERED ---
         if (!isPressed) {
             isPressed = true;
-            stateChangeTime = currentMillis; // Record when press started
+            stateChangeTime = now; 
+            displayCleared = false;
+        } else if (!displayCleared && elapsed > clearHold) { // Long hold to clear
+            lcd.clear();
+            cursorCol = cursorRow = 0;
+            currentMorse = ""; 
+            displayCleared = true;
         }
-    } else { // Large distance = Released
+    } else { // --- UNCOVERED ---
         if (isPressed) {
             isPressed = false;
-            unsigned long duration = currentMillis - stateChangeTime;
-            
-            // CHECK TIME: Ignore tiny glitches (< 50ms)
-            if (duration > 50) { 
-                if (duration <= dotDuration) {
-                    currentMorse += ".";
-                } else {
-                    currentMorse += "-";
-                }
+            // Record dot or dash if not clearing the screen (ignore <50ms glitches)
+            if (!displayCleared && elapsed > 50) {
+                currentMorse += (elapsed <= dotLen) ? "." : "-";
             }
-            stateChangeTime = currentMillis; // Record when release started
+            stateChangeTime = now;
         } else {
-            // If released and enough time has passed, decode the letter
-            if (currentMorse.length() > 0 && (currentMillis - stateChangeTime) > letterTimeout) {
-                char decodedLetter = decodeMorse(currentMorse);
-                
-                // OUTPUT NOTHING BUT THE LETTER
-                lcd.print(decodedLetter);
-                Serial.println(dist);
-                
-                // Manage LCD screen wrapping
-                cursorCol++;
-                if (cursorCol >= 16) {
-                    cursorCol = 0;
-                    cursorRow = (cursorRow == 0) ? 1 : 0;
-                    if (cursorRow == 0) lcd.clear(); // Clear if wrapping back to the top left
-                    lcd.setCursor(cursorCol, cursorRow);
-                }
-                
-                currentMorse = ""; // Reset for the next letter
+            // Check timeouts for letters and spaces
+            if (currentMorse.length() > 0 && elapsed > letterGap) {
+                lcd.print(decodeMorse(currentMorse));
+                advanceCursor();
+                currentMorse = ""; 
+                spacePrinted = false;
+            } else if (currentMorse.length() == 0 && !spacePrinted && elapsed > wordGap) {
+                lcd.print(" ");
+                advanceCursor();
+                spacePrinted = true;
             }
         }
     }
-    
-    // Short delay for sensor stability (allows sensor to process echos)
     delay(30); 
 }
