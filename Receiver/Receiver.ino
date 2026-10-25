@@ -19,7 +19,7 @@ uint8_t cursorCol = 0, cursorRow = 0;
 
 
 // Lookup table mapping Morse code sequences to the alphabet (A-Z)
-// Not in ASCII: #, %, *, <, >, [, ], \, ^
+// Not in Morse Code: #, %, *, <, >, [, ], \, ^
 const char* morseTable[] = {
   "-.-.--", // ! (ASCII 33)
   ".-..-.", // " (ASCII 34)
@@ -152,7 +152,7 @@ void loop() {
                 advanceCursor();
                 currentMorse = ""; 
                 spacePrinted = false; // Allow a space to be printed next if the gap continues
-            } else if (currentMorse.length() == 0 && !spacePrinted && elapsed > wordGap) { // Gap is > 2 seconds - print space
+            } else if (currentMorse.length() == 0 && !spacePrinted && elapsed > wordGap) { // Gap is > 1.1 seconds - print space
                 lcd.print(" ");
                 advanceCursor();
                 spacePrinted = true; // Prevent printing endless spaces
