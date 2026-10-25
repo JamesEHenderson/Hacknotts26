@@ -19,10 +19,71 @@ uint8_t cursorCol = 0, cursorRow = 0;
 
 
 // Lookup table mapping Morse code sequences to the alphabet (A-Z)
+// Not in ASCII: #, %, *, <, >, [, ], \, ^
 const char* morseTable[] = {
-  ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---",
-  "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-",
-  "..-", "...-", ".--", "-..-", "-.--", "--.."
+  "-.-.--", // ! (ASCII 33)
+  ".-..-.", // " (ASCII 34)
+  "",       // # (ASCII 35) - NO MORSE
+  "...-..-",// $ (ASCII 36)
+  "",       // % (ASCII 37) - NO MORSE
+  ".-...",  // & (ASCII 38)
+  ".----.", // ' (ASCII 39)
+  "-.--.",  // ( (ASCII 40)
+  "-.--.-", // ) (ASCII 41)
+  "",       // * (ASCII 42) - NO MORSE
+  ".-.-.",  // + (ASCII 43)
+  "--..--", // , (ASCII 44)
+  "-....-", // - (ASCII 45)
+  ".-.-.-", // . (ASCII 46)
+  "-..-.",  // / (ASCII 47)
+  "-----",  // 0 (ASCII 48)
+  ".----",  // 1 (ASCII 49)
+  "..---",  // 2 (ASCII 50)
+  "...--",  // 3 (ASCII 51)
+  "....-",  // 4 (ASCII 52)
+  ".....",  // 5 (ASCII 53)
+  "-....",  // 6 (ASCII 54)
+  "--...",  // 7 (ASCII 55)
+  "---..",  // 8 (ASCII 56)
+  "----.",  // 9 (ASCII 57)
+  "---...", // : (ASCII 58)
+  "-.-.-.", // ; (ASCII 59)
+  "",       // < (ASCII 60) - NO MORSE
+  "-...-",  // = (ASCII 61)
+  "",       // > (ASCII 62) - NO MORSE
+  "..--..", // ? (ASCII 63)
+  ".--.-.", // @ (ASCII 64)
+  ".-",     // A (ASCII 65)
+  "-...",   // B (ASCII 66)
+  "-.-.",   // C (ASCII 67)
+  "-..",    // D (ASCII 68)
+  ".",      // E (ASCII 69)
+  "..-.",   // F (ASCII 70)
+  "--.",    // G (ASCII 71)
+  "....",   // H (ASCII 72)
+  "..",     // I (ASCII 73)
+  ".---",   // J (ASCII 74)
+  "-.-",    // K (ASCII 75)
+  ".-..",   // L (ASCII 76)
+  "--",     // M (ASCII 77)
+  "-.",     // N (ASCII 78)
+  "---",    // O (ASCII 79)
+  ".--.",   // P (ASCII 80)
+  "--.-",   // Q (ASCII 81)
+  ".-.",    // R (ASCII 82)
+  "...",    // S (ASCII 83)
+  "-",      // T (ASCII 84)
+  "..-",    // U (ASCII 85)
+  "...-",   // V (ASCII 86)
+  ".--",    // W (ASCII 87)
+  "-..-",   // X (ASCII 88)
+  "-.--",   // Y (ASCII 89)
+  "--..",   // Z (ASCII 90)
+  "",       // [ (ASCII 91) - NO MORSE
+  "",       // \ (ASCII 92) - NO MORSE
+  "",       // ] (ASCII 93) - NO MORSE
+  "",       // ^ (ASCII 94) - NO MORSE
+  "..--.-"  // _ (ASCII 95)
 };
 
 void setup() {
@@ -34,8 +95,8 @@ void setup() {
 
 // Scans the lookup table and returns the matching character, or '?' if invalid
 char decodeMorse(String m) {
-    for (uint8_t i = 0; i < 26; i++) {
-        if (m == morseTable[i]) return 'A' + i;
+    for (uint8_t i = 0; i < 63; i++) {
+        if (morseTable[i] != "" && m == morseTable[i]) return '!' + i;
     }
     return '?';
 }
