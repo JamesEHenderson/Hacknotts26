@@ -6,8 +6,8 @@ byte echoPins[] = {2};
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 // --- Settings & State Variables ---
-const uint8_t thresholdDist = 15; 
-const unsigned long dotLen = 300, letterGap = 700, wordGap = 2000, clearHold = 3000;
+const uint8_t thresholdDist = 20;
+const unsigned long dotLen = 300, letterGap = 700, wordGap = 1100, clearHold = 3000;
 
 // --- State Tracking Variables ---
 bool isPressed = false;
@@ -62,7 +62,7 @@ void loop() {
     unsigned long elapsed = now - stateChangeTime;
 
     // Filter out invalid sensor readings (out of bounds or zero)
-    if (dist <= 0 || dist > 400) { delay(30); return; }
+    if (dist <= 0 || dist > 600) { delay(30); return; }
 
     if (dist < thresholdDist) { // --- Sensor Covered ---
         if (!isPressed) { // Sensor covered start timer
@@ -74,8 +74,7 @@ void loop() {
             cursorCol = cursorRow = 0;
             currentMorse = ""; 
             displayCleared = true;
-        }
-        
+        }    
     } else { // --- UNCOVERED ---
         if (isPressed) {
             isPressed = false;
