@@ -1,5 +1,6 @@
 #include "ESP32Servo.h"
 
+
 #define SIGNAL_PIN 18
 
 Servo servo;
@@ -52,8 +53,8 @@ void loop()
     char c = '\0';
     int morse_index = 0;
 
-    const int CHAR_DELAY = 1000; //The delay in ms between each symbol
-    const int WORD_DELAY = 2000; //The delay in ms to denote a space
+    const int CHAR_DELAY = 700; //The delay in ms between each symbol
+    const int WORD_DELAY = 1100; //The delay in ms to denote a space
     const int DOT_DELAY = 400; //The delay in ms to denote a dot
     const int DASH_DELAY = 700; //The delay in ms to denote a dash
 
@@ -105,11 +106,6 @@ void loop()
 
        
     }
-    Serial.printf("\n\n");
-
-
-    
-
     
 
     // Serial.print("One direction\n");
