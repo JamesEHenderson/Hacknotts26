@@ -7,7 +7,7 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 // --- Settings & State Variables ---
 const uint8_t thresholdDist = 20;
-const unsigned long dotLen = 300, letterGap = 700, wordGap = 1100, clearHold = 3000;
+const unsigned long dotLen = 400, letterGap = 700, wordGap = 1100, clearHold = 3000;
 
 // --- State Tracking Variables ---
 bool isPressed = false;
@@ -135,6 +135,7 @@ void loop() {
             cursorCol = cursorRow = 0;
             currentMorse = ""; 
             displayCleared = true;
+            spacePrinted = true;
         }    
     } else { // --- UNCOVERED ---
         if (isPressed) {
