@@ -20,6 +20,6 @@ We learned a lot about programming Arduino and microcontroller technology using 
 ## What's next for Morse Code UltraSonic Transmitter
 We have plans to make it a two way communication with applying both the transmitter and receiver code to both of them. We also would like to add a 3rd part of the communication, where the receiver passes on the decoded message to a different piece of technology such as a TV screen or a projector.
 
-## Technology we used
-Hardware: Arduino, ESP32, LCD, Ultrasonic Sensor, Servo Motor.
-Software: Ardino IDE, VSCode, Git.
+## Built With
+`Arduino` `circuits` `ESP312` `Microcontroller` `LCD` `Ultrasonic Sensor` `Servo Motor`
+`c++` `Ardino IDE`
