@@ -1,5 +1,7 @@
 # Hacknotts26 - Morse Code Ultrasonic Transmitter
 
+For Hacknotts26, a 24-Hour Hackathon, we built a Bluetooth text to morse code converter on an ESP32 microcontroller sending the information to an arduino uni to then decode and display on an LCD screen.
+
 [![Watch the Demo Video!](https://www.youtube.com/watch?v=JobzFIudcuk)](https://www.youtube.com/watch?v=JobzFIudcuk)
 
 
