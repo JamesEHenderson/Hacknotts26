@@ -106,7 +106,7 @@ void flagUp(){
 
 void resetLCD(){
     flagDown();
-    delay(3200);
+    delay(3100);
     flagUp();
 }
 
@@ -116,8 +116,8 @@ void loop()
     int i = 0, j = 0, morse_index = 0;
     char c = '\0';
 
-    const int CHAR_DELAY = 700; //The delay in ms between each symbol
-    const int WORD_DELAY = 1100; //The delay in ms to denote a space
+    const int CHAR_DELAY = 800; //The delay in ms between each symbol
+    const int WORD_DELAY = 1300; //The delay in ms to denote a space
     const int DOT_DELAY = 300; //The delay in ms to denote a dot
     const int DASH_DELAY = 600; //The delay in ms to denote a dash
 
