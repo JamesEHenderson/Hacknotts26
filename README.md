@@ -19,3 +19,7 @@ Since this is our first hardware project we are quite proud of being able to act
 We learned a lot about programming Arduino and microcontroller technology using the small version of C++ that is used in Arduino IDE. We also learned about the satisfaction of code running on hardware over regular software with seeing actual physical things happen without a computer connected to either of them.
 ## What's next for Morse Code UltraSonic Transmitter
 We have plans to make it a two way communication with applying both the transmitter and receiver code to both of them. We also would like to add a 3rd part of the communication, where the receiver passes on the decoded message to a different piece of technology such as a TV screen or a projector.
+
+## Technology we used
+Hardware: Arduino, ESP32, LCD, Ultrasonic Sensor, Servo Motor.
+Software: Ardino IDE, VSCode, Git.
