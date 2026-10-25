@@ -1,10 +1,5 @@
 # Hacknotts26 - Morse Code Ultrasonic Transmitter
 
-2 LCD Displays, 2 Arduino's, IR Transmitter and a Motor Device
-
-Input message through a laptop keyboard, which gets processed by the ardiuno to display the message on an LCD display and sets up the motor device to move up and down.
-Meanwhile the ultrasonic transmitter detects the Morse Code encoded in the motor's movements and outputs it on an LCD display. As the text is transmitted, a letter is displayed on the output LCD display and removed from the input LCD display.
-
 ## Inspiration
 We were originally inspired by pager technology in the early 2000s, this then progressed into a different project after we were trying to brainstorm ways to get them to communicate with each other (we decided on morse code) then quickly evolved into our finished project.
 ## What it does
@@ -21,5 +16,5 @@ We learned a lot about programming Arduino and microcontroller technology using 
 We have plans to make it a two way communication with applying both the transmitter and receiver code to both of them. We also would like to add a 3rd part of the communication, where the receiver passes on the decoded message to a different piece of technology such as a TV screen or a projector.
 
 ## Built With
-`Arduino` `circuits` `ESP312` `Microcontroller` `LCD` `Ultrasonic Sensor` `Servo Motor`
-`c++` `Ardino IDE`
+`Arduino` `Circuits` `ESP312` `Microcontroller` `LCD` `Ultrasonic Sensor` `Servo Motor`
+`C++` `Ardino IDE`
