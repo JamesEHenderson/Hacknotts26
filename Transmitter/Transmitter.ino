@@ -1,9 +1,22 @@
 #include "ESP32Servo.h"
-
+#include "BluetoothSerial.h"
 
 #define SIGNAL_PIN 18
 
+BluetoothSerial BT;
 Servo servo;
+
+
+String bluetoothInput(){
+
+    while(BT.available() == 0);
+
+    String msg = BT.readStringUntil('\n');
+    msg.trim();
+    return msg;
+}
+
+
 
 const char* morseTable[] = {
   ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---",
@@ -15,7 +28,7 @@ void setup()
 {
 	Serial.begin(9600);
     servo.attach(SIGNAL_PIN);
-
+    BT.begin("Esp32-BT");
     Serial.print("Enter some text! :\n");
 }
 
@@ -30,11 +43,12 @@ String serialInput(){
 }
 
 void flagDown(){
-    servo.write(90);
+    servo.write(0);
+    
 }
 
 void flagUp(){
-    servo.write(0);
+    servo.write(90);
 }
 
 void resetLCD(){
@@ -55,12 +69,13 @@ void loop()
 
     const int CHAR_DELAY = 700; //The delay in ms between each symbol
     const int WORD_DELAY = 1100; //The delay in ms to denote a space
-    const int DOT_DELAY = 400; //The delay in ms to denote a dot
-    const int DASH_DELAY = 700; //The delay in ms to denote a dash
+    const int DOT_DELAY = 300; //The delay in ms to denote a dot
+    const int DASH_DELAY = 600; //The delay in ms to denote a dash
+
 
     flagUp();
 
-    txt = serialInput();
+    txt = bluetoothInput();
     
 
     String morse_code = "";
