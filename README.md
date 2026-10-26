@@ -4,10 +4,9 @@ For Hacknotts26, a 24-Hour Hackathon, we built a Bluetooth text to morse code co
 
 [![Watch the Demo Video!](https://www.youtube.com/watch?v=JobzFIudcuk)](https://www.youtube.com/watch?v=JobzFIudcuk)
 
-![WhatsApp Image](image/WhatsApp%20Image%202026-10-25%20at%2011.34.09.jpeg)
-![WhatsApp Image](image/WhatsApp%20Image%202026-10-25%20at%2011.34.10.jpeg)
-![WhatsApp Image](image/WhatsApp%20Image%202026-10-25%20at%2011.34.11.jpeg)
-![WhatsApp Image](image/WhatsApp%20Image%202026-10-25%20at%2011.34.18.jpeg)
+![Image](images/WhatsApp%20Image%202026-10-25%20at%2011.34.10.jpeg)
+![Image](images/WhatsApp%20Image%202026-10-25%20at%2011.34.11.jpeg)
+![Image](images/WhatsApp%20Image%202026-10-25%20at%2011.34.18.jpeg)
 
 ## Inspiration
 We were originally inspired by pager technology in the early 2000s, this then progressed into a different project after we were trying to brainstorm ways to get them to communicate with each other (we decided on morse code) then quickly evolved into our finished project.
