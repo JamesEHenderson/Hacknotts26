@@ -25,7 +25,12 @@ Since this is our first hardware project we are really quite proud of being able
 We learned a lot about low-level programming with Arduino and microcontroller technology using a version of C++ intended for Arduino's. We also learned the satisfaction of our code running on hardware over regular software and seeing actual, physical things happen without a computer connected to either of them.
 ## What's next for the Morse Code UltraSonic Transmitter
 We have plans to allow the project two way communication by merging both the transmitter and receiver code. We would also like to add a 3rd part to the communication, where the receiver passes on the decoded message to a different piece of technology such as a TV screen or a projector.
-
+## Collaborators
+- Ethan Fernandes
+- James Henderson
+- James Milligan
+- Ryan Roberts
 ## Built With
 `Arduino` `Circuits` `ESP32` `Microcontroller` `LCD` `Ultrasonic Sensor` `Servo Motor`
 `C++` `Arduino IDE`
+
