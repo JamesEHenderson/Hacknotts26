@@ -4,7 +4,7 @@ For Hacknotts26, a 25-Hour Hackathon, we built a Bluetooth text to morse code co
 
 [Watch the Demo Video!](https://www.youtube.com/watch?v=JobzFIudcuk)
 
-<img src="images/WhatsApp Image 2026-10-25 at 11.34.10.jpeg" width="30%" hspace=2 alt="Image"><img src="images/WhatsApp Image 2026-10-25 at 11.34.11.jpeg" width="30%" hspace=2 alt="Image"><img src="images/WhatsApp Image 2026-10-25 at 11.34.18.jpeg" width="30%" hspace=2 alt="Image">
+<img src="images/WhatsApp Image 2026-10-25 at 11.34.10.jpeg" width="30%" hspace=2 alt="Image"><img src="images/WhatsApp Image 2026-10-25 at 11.34.11.jpeg" width="30%" hspace=2 alt="Image"><img src="images/IMG_6565.jpeg" width="30%" hspace=2 alt="Image">
 
 
 ## Inspiration
